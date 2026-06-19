@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+
+<style>
+body{
+font-family:Arial;
+background:#f4f4f4;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:white;
+padding:30px;
+width:350px;
+border-radius:10px;
+box-shadow:0 0 10px gray;
+}
+
+input{
+width:100%;
+padding:10px;
+margin:10px 0;
+}
+
+button{
+width:100%;
+padding:10px;
+background:#4caf50;
+color:white;
+border:none;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+<h2>Register</h2>
+
+<input type="text" id="name" placeholder="Name">
+<input type="email" id="email" placeholder="Email">
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="register()">Register</button>
+
+<br><br>
+
+<h2>Login</h2>
+
+<input type="email" id="lemail" placeholder="Email">
+<input type="password" id="lpassword" placeholder="Password">
+
+<button onclick="login()">Login</button>
+</div>
+
+<script>
+
+async function register(){
+
+await fetch("http://localhost:5000/register",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+name:name.value,
+email:email.value,
+password:password.value
+})
+});
+
+alert("Registered");
+}
+
+async function login(){
+
+const res=await fetch("http://localhost:5000/login",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+email:lemail.value,
+password:lpassword.value
+})
+});
+
+const data=await res.json();
+
+localStorage.setItem("userId",data.id);
+
+window.location="dashboard.html";
+}
+
+</script>
+
+</body>
+</html>

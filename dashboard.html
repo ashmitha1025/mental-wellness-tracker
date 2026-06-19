@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mood Tracker</title>
+
+<style>
+body{
+font-family:Arial;
+padding:50px;
+background:#eef2ff;
+}
+
+.card{
+background:white;
+padding:20px;
+width:400px;
+margin:auto;
+border-radius:10px;
+}
+
+select,button{
+width:100%;
+padding:10px;
+margin-top:10px;
+}
+
+button{
+background:#2563eb;
+color:white;
+border:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Track Mood</h2>
+
+<select id="mood">
+<option>Happy</option>
+<option>Neutral</option>
+<option>Sad</option>
+<option>Stressed</option>
+</select>
+
+<button onclick="saveMood()">Save Mood</button>
+
+<br><br>
+
+<a href="journal.html">Journal Page</a>
+
+</div>
+
+<script>
+
+async function saveMood(){
+
+let score=5;
+
+if(mood.value=="Sad")
+score=1;
+
+if(mood.value=="Neutral")
+score=3;
+
+if(mood.value=="Stressed")
+score=2;
+
+await fetch("http://localhost:5000/mood",{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+
+user_id:localStorage.getItem("userId"),
+
+mood:mood.value,
+
+mood_score:score
+
+})
+});
+
+alert("Mood Saved");
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Analytics</title>
+
+<style>
+body{
+font-family:Arial;
+background:#e0f2fe;
+padding:50px;
+}
+
+.card{
+background:white;
+padding:20px;
+width:500px;
+margin:auto;
+border-radius:10px;
+text-align:center;
+}
+
+h1{
+color:#2563eb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Analytics Dashboard</h2>
+
+<h1 id="avgMood">0</h1>
+<p>Average Mood Score</p>
+
+<h1 id="journals">0</h1>
+<p>Total Journals</p>
+
+</div>
+
+<script>
+
+async function loadData(){
+
+const id=localStorage.getItem("userId");
+
+const res=await fetch(
+`http://localhost:5000/analytics/${id}`
+);
+
+const data=await res.json();
+
+avgMood.innerHTML=
+Number(data.avgMood).toFixed(2);
+
+journals.innerHTML=
+data.totalJournals;
+}
+
+loadData();
+
+</script>
+
+</body>
+</html>
