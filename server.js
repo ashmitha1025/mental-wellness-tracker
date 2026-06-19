@@ -5,11 +5,10 @@ const cors = require("cors");
 const { Pool } = require("pg");
 
 const pool = new Pool({
-    user:"postgres",
-    host:"localhost",
-    database:"mental_tracker",
-    password:"ashmi",
-    port:5432
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 module.exports = pool;
@@ -88,6 +87,8 @@ app.get("/analytics/:id",async(req,res)=>{
     });
 });
 
-app.listen(5000,()=>{
-    console.log("Server Running");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server Running on ${PORT}`);
 });
