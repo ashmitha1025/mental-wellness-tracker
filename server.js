@@ -3,10 +3,13 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const path = require("path");
 
+
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use(express.static(__dirname));
 
 // Database Connection
 const pool = process.env.DATABASE_URL
