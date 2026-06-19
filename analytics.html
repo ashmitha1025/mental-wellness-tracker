@@ -46,7 +46,7 @@ async function loadData(){
 const id=localStorage.getItem("userId");
 
 const res=await fetch(
-`http://localhost:5000/analytics/${id}`
+`https://mental-wellness-tracker.onrender.com/analytics/${id}`
 );
 
 const data=await res.json();
