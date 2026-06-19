@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
+const path = require("path");
 
 const app = express();
 
@@ -213,6 +214,24 @@ const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
     res.send("Mental Wellness Tracker Backend is Running");
+});
+
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "login.html"));
+});
+
+app.get("/dashboard", (req, res) => {
+    res.sendFile(path.join(__dirname, "dashboard.html"));
+});
+
+
+
+app.get("/journal-page", (req, res) => {
+    res.sendFile(path.join(__dirname, "journal.html"));
+});
+
+app.get("/analytics-page", (req, res) => {
+    res.sendFile(path.join(__dirname, "analytics.html"));
 });
 
 app.listen(PORT, () => {
