@@ -211,6 +211,10 @@ app.get("/analytics/:id", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
+app.get("/", (req, res) => {
+    res.send("Mental Wellness Tracker Backend is Running");
+});
+
 app.listen(PORT, () => {
   console.log(`Server Running on Port ${PORT}`);
 });
